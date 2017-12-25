@@ -1,0 +1,28 @@
+<html ng-app="houseApp">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+<!--         <div>
+            <img class="map" src="images/xian_map.png" width="1000" height="600" usemap="#urls">
+            <map name="urls">
+                <area shape="rect" coords="0,0,1000,150" href="javascript:alert('爸爸是个大帅哥！！！');" title="area 1">
+                <area shape="rect" coords="0,150,1000,300" href="javascript:alert('XXXXXX');" title="area 2">
+                <area shape="rect" coords="0,300,1000,450" href="javascript:alert('Navigate to 3');" title="area 3">
+                <area shape="rect" coords="0,450,1000,600" href="javascript:alert('Navigate to 4');" title="area 4">
+            </map>
+        </div> -->
+        <div>Map testing</div>
+        <div ng-view></div>
+
+        <script type="text/javascript" src="bundle.js" charset="utf-8">
+    	</script>
+        <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    	<script type="text/javascript" src="node_modules/maphilight/jquery.maphilight.min.js"></script>
+    	<script type="text/javascript">
+                $(function () {
+                    $('.map').maphilight();
+                });
+    	</script>
+    </body>
+</html>
