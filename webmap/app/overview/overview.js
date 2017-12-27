@@ -13,4 +13,11 @@ angular.module('houseApp.overview', ['ngRoute'])
 	$scope.test = "xxxxxx";
 	$('.map').maphilight();
 
+
+	$scope.areaClick = function(element){
+		console.log("----------------");
+		console.log(element);
+
+	}
+
 }]);
