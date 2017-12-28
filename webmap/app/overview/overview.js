@@ -10,14 +10,31 @@ angular.module('houseApp.overview', ['ngRoute'])
 }])
 
 .controller('OverviewCtrl', ['$scope', function($scope) {
-	$scope.test = "xxxxxx";
+	$('.information').css({
+    	position: 'absolute'
+	}).hide();
+
+	$('area').each(function(i) {
+	    $('area').eq(i).bind('mouseover', function(e) {
+	        $('.information').eq(i).css({
+	            top: e.pageY,
+	            left: e.pageX
+	        }).show();
+	    });
+	    $('area').eq(i).bind('mouseout', function() {
+	        $('.information').hide();
+	    });
+	});
+
 	$('.map').maphilight();
 
 
 	$scope.areaClick = function(element){
-		console.log("----------------");
-		console.log(element);
 
-	}
+	};
+
+	$scope.test = function(){
+		console.log("hahahahah");
+	};
 
 }]);

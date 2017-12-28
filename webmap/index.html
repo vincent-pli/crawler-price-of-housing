@@ -1,19 +1,17 @@
 <html ng-app="houseApp">
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <style type="text/css">
+        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+        </style>
+        <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Y43ylKIV62Ewf8boANMDGMCTBvvzSoql"></script>
+        <title>地图展示</title>
     </head>
     <body>
-<!--         <div>
-            <img class="map" src="images/xian_map.png" width="1000" height="600" usemap="#urls">
-            <map name="urls">
-                <area shape="rect" coords="0,0,1000,150" href="javascript:alert('爸爸是个大帅哥！！！');" title="area 1">
-                <area shape="rect" coords="0,150,1000,300" href="javascript:alert('XXXXXX');" title="area 2">
-                <area shape="rect" coords="0,300,1000,450" href="javascript:alert('Navigate to 3');" title="area 3">
-                <area shape="rect" coords="0,450,1000,600" href="javascript:alert('Navigate to 4');" title="area 4">
-            </map>
-        </div> -->
         <div>Map testing</div>
-        <div ng-view></div>
+        <!-- <div ng-view></div> -->
 
         <script type="text/javascript" src="bundle.js" charset="utf-8">
     	</script>
@@ -24,5 +22,65 @@
                     $('.map').maphilight();
                 });
     	</script>
+
+        <div id="allmap"></div>
     </body>
 </html>
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("allmap", {minZoom:11,maxZoom:15, enableMapClick:false});    // 创建Map实例
+    map.centerAndZoom(new BMap.Point(108.95, 34.26), 13);  // 初始化地图,设置中心点坐标和地图级别
+    //添加地图类型控件
+    var point = new BMap.Point(108.788, 34.316);
+    var marker = new BMap.Marker(point);
+    map.addOverlay(marker);
+    marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+    var label = new BMap.Label("我是家",{offset:new BMap.Size(20,-10)});
+    marker.setLabel(label);
+
+
+    var pointxiari = new BMap.Point(108.88, 34.23);
+    var markerxiari = new BMap.Marker(pointxiari);
+    map.addOverlay(markerxiari);
+    markerxiari.setAnimation(BMAP_ANIMATION_BOUNCE);
+    var labelxiari = new BMap.Label("我是下一个家",{offset:new BMap.Size(20,-10)});
+    markerxiari.setLabel(labelxiari);
+
+    var pointshangcheng = new BMap.Point(108.9198, 34.263);
+    var markershangcheng = new BMap.Marker(pointshangcheng);
+    map.addOverlay(markershangcheng);
+    markershangcheng.setAnimation(BMAP_ANIMATION_BOUNCE);
+    var labelshangcheng = new BMap.Label("我是曾经的家",{offset:new BMap.Size(20,-10)});
+    markershangcheng.setLabel(labelshangcheng);
+
+    map.addControl(new BMap.MapTypeControl({
+        mapTypes:[
+            BMAP_NORMAL_MAP,
+            BMAP_HYBRID_MAP
+        ]}));
+    map.setCurrentCity("西安");          // 设置地图显示的城市 此项是必须设置的
+    // map.disableDragging();
+    // map.centerAndZoom("西安", 13);
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
+    function getBoundary(){       
+        var bdary = new BMap.Boundary();
+        bdary.get("西安莲湖", function(rs){       //获取行政区域
+                map.clearOverlays();        //清除地图覆盖物       
+                var count = rs.boundaries.length; //行政区域的点有多少个
+                if (count === 0) {
+                    alert('未能获取当前输入行政区域');
+                    return ;
+                }
+                var pointArray = [];
+                for (var i = 0; i < count; i++) {
+                    var ply = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 2, strokeColor: "#ff0000"}); //建立多边形覆盖物
+                    map.addOverlay(ply);  //添加覆盖物
+                    pointArray = pointArray.concat(ply.getPath());
+                }    
+                // map.setViewport(pointArray);    //调整视野  
+                // addlabel();               
+            });   
+    };
+    // getBoundary();
+</script>

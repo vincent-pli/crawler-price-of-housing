@@ -11,7 +11,8 @@
     "jquery": "2.1.4",
     "maphilight": "1.2.3",
     "angular": "1.5.11",
-    "angular-route": "~1.5.0"
+    "angular-route": "~1.5.0",
+    "angular-tooltips": "1.2.2"
   },
   "devDependencies": {
     "babel-core": "5.8.38",
